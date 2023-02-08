@@ -33,10 +33,8 @@ public class Client_main {
 
         } catch (ConnectException ce){
             ce.printStackTrace();
-        } catch (IOException ie){
+        } catch (Exception ie){
             ie.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }
