@@ -35,7 +35,7 @@ public class Client_main {
             ce.printStackTrace();
         } catch (IOException ie){
             ie.printStackTrace();
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
