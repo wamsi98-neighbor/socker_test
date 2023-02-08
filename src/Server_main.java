@@ -5,11 +5,12 @@ import java.util.Date;
 
 public class Server_main {
     public static void main(String[] args) {
-
+        // 1. Server프로그램에서 사용하는소캣, Port를 통해 연결 요청이 오기를 대기
         ServerSocket serverSocket = null;
 
         try {
-            serverSocket = new ServerSocket(4444);  // port 할당?
+            // 2. 특정 Port를 열어놓은 상태에서 대기, 접속 요청이 온다면 새로운 소켓으로 연결처리
+            serverSocket = new ServerSocket(4444);
         }catch (IOException e){
             System.out.println("해당 포트가 열려있습니다.");
         }
@@ -19,11 +20,16 @@ public class Server_main {
             try {
                 System.out.println(getTime() + "연결 요청을 기다리는 중입니다 ");
 
+                // 3. accept()메소드 호출. Client로부터 요청이 올 때까지  Blocking 상태
+                // 4. Connection 요청이 들어오면 새로운 Socket을 생성하여, Client와 한쌍을 이루고 연결됨
                 Socket socket = serverSocket.accept();
                 System.out.println(getTime() + socket.getInetAddress());
 
+                // 5. getInputSteam()은 inputStream 객체를 반환하기 때문에 InputStream type의 변수에 대입
+                // 6. DataOutputeStream 주석과 동일
                 InputStream in = socket.getInputStream();
                 DataInputStream dis = new DataInputStream(in);
+                // 7. readUTF()로 받은 메세지를 UTF-8 인코딩을 사용해서 읽어들임
                 System.out.println("받은 메세지 : " + dis.readUTF());
                 System.out.println("연결을 종료합니다. ");
 
