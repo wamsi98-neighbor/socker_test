@@ -30,14 +30,14 @@ public class Server_main {
                 InputStream in = socket.getInputStream();
                 DataInputStream dis = new DataInputStream(in);
                 // 7. readUTF()로 받은 메세지를 UTF-8 인코딩을 사용해서 읽어들임
-                System.out.println("받은 메세지 : " + dis.readUTF());
+                String recHex = dis.readUTF();  // 받은 hex값
+
+                // hex --> byte[] --> String 수행
+                String hexToName = hexChangeString(recHex);
+
+                System.out.println("[Server 출력]받은 메세지 : " + hexToName );
                 System.out.println("연결을 종료합니다. ");
 
-                /*
-                    1. client에서 BufferedReader로 받아보자
-                    2. readUTF() 만약 quit이라는 단어가 들어온다면 socket 종료해버리기
-                 */
-                
                 dis.close();
                 socket.close();
                 System.out.println("연결을 종료되었습니다. ");
@@ -47,6 +47,18 @@ public class Server_main {
                      }
                   }
             }
+
+    public static String hexChangeString(String s) throws UnsupportedEncodingException {    //ec9e84eab2bdebafbc
+        int len = s.length();
+
+        byte[] data = new byte[len /2];
+
+        for(int i = 0; i < len; i+=2){
+            data[i/2] = (byte) (
+                    (Character.digit(s.charAt(i),16) <<4)  + Character.digit(s.charAt(i+1), 16));
+        }
+        return new String(data, "EUC-KR");
+    }
 
     // 현재 시간을 문자열로 반환하는 함수
     private static String getTime() {

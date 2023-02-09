@@ -27,8 +27,9 @@ public class hexTest_main {
 
     public static byte[] hexStringToByteArray(String s){    //ec9e84eab2bdebafbc
         // 3. hex값의 길이 지정
-        int len = s.length();   // hex코드의 길이, 모든 요소에 접근하기 위해서 필요
-        
+        int len;   // hex코드의 길이, 모든 요소에 접근하기 위해서 필요
+        len = s.length();
+
         // 길이의 절반인 이유는, byte단위 저장이라서. 16진수 한자리 = 4bit, 8bit = 1byte
         // 4. byte 배열 결과값을 받을 배열 data 생성
         // 4-1. 길이가 절반인 이유는. byte단위 저장이기 때문! 16진수 한자리 = 4bit . 1byte = 8bit
@@ -54,6 +55,7 @@ public class hexTest_main {
         StringBuilder sb = new StringBuilder();
 
         for (byte b : bytes){
+            // 이해 안감 https://ddangeun.tistory.com/43
             sb.append(String.format("%02X", b&0xff));
         }
         return sb.toString().toLowerCase();

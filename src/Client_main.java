@@ -29,10 +29,10 @@ public class Client_main {
             // 4-1. UTF-8 인코딩을 사용해서 문자열을 출력, 네트워크 프로그래밍을 할 때, 문자열 전송시 자주 사용된다고 함.
 
             String name = "임경민";
-
-            String result = convertToHex(name);
-
-            dos.writeUTF(result);
+            // String -> byte[] -> hex
+            String nameToHex = nameChangeHex(name);
+            
+            dos.writeUTF(nameToHex);
             System.out.println("데이터를 전송합니다");
 
             dos.close();
@@ -47,11 +47,28 @@ public class Client_main {
         }
     }
 
-        private static String convertToHex (String name){
-            byte[] getByteString = name.getBytes(StandardCharsets.UTF_8);
-            BigInteger bigInteger = new BigInteger(1, getByteString);
-
-            String convertResult = String.format("%x", bigInteger);
-            return convertResult;
+    public static String nameChangeHex(String s) throws UnsupportedEncodingException {
+        // 이름에서 바뀐 배열
+        byte[] byteArray = s.getBytes("EUC-KR");
+        System.out.println("[Client 입력] 이름 -> 배열 : " + byteArray);
+        // 배열에서 hex로
+        StringBuilder sb = new StringBuilder();
+        // 이해 안감 https://ddangeun.tistory.com/43
+        for (byte b : byteArray){
+            sb.append(String.format("%02X", b&0xff));
         }
+
+        System.out.println("[Client 입력] 배열 -> 16진수 : " + sb.toString().toLowerCase());
+        return sb.toString().toLowerCase();
+
+    }
+
+
+    private static String convertToHex (String name){
+        byte[] getByteString = name.getBytes(StandardCharsets.UTF_8);
+        BigInteger bigInteger = new BigInteger(1, getByteString);
+
+        String convertResult = String.format("%x", bigInteger);
+        return convertResult;
+    }
 }
