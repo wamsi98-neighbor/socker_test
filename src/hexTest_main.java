@@ -71,3 +71,11 @@ public class hexTest_main {
         return byteArray;
     }
 }
+
+/*
+원본 : ec9e84eab2bdebafbc
+16진수 -> 바이트배열 : [B@50c87b21
+바이트배열 -> 16진수 : ec9e84eab2bdebafbc
+바이트배열 -> 문자열 : 임경민
+문자열 -> 바이트배열 : [B@5f375618
+ */
