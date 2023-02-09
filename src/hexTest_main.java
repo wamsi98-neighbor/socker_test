@@ -6,7 +6,7 @@ public class hexTest_main {
     // hex값 받아서 --> byte코드 변환
     public static void main(String[] args) throws UnsupportedEncodingException {
         // 1. 패킷에서 넘어온 이름에 관한 hex값이라고 가정
-         String hexValue = "ec9e84eab2bdebafbc";
+         String hexValue = "C0D3B0E6B9CE";
          String name = "임경민";
          // 2. 해당 메소드에 hex값을 넘겨서 byte 배열로 만듬
          byte[] byteArr = hexStringToByteArray(hexValue);
@@ -61,12 +61,12 @@ public class hexTest_main {
 
     public static String byteArrayToName(byte[] bytes) throws UnsupportedEncodingException {
 
-        return new String(bytes, "UTF-8");
+        return new String(bytes, "EUC-KR");
     }
 
     public static byte[] NameToByteArray(String s) throws UnsupportedEncodingException {
 
-        byte[] byteArray = s.getBytes("UTF-8");
+        byte[] byteArray = s.getBytes("EUC-KR");
 
         return byteArray;
     }
