@@ -1,6 +1,8 @@
 import java.io.*;
+import java.math.BigInteger;
 import java.net.ConnectException;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 
 public class Client_main {
 
@@ -10,7 +12,7 @@ public class Client_main {
             String SERVER_IP = "211.189.132.233";       // 0. 내 IP 할당
 
             System.out.println("서버에 연결 중입니다. 서버 IP : " +  SERVER_IP);
-            
+
             // 1. Socket 생성 및 IP와 Port 할당
             Socket socket = new Socket(SERVER_IP, 4444);
 
@@ -25,7 +27,12 @@ public class Client_main {
 
             // 4. writeUTF(String str)을 사용 / writeDouble, writeInt, writeLong 등 존재
             // 4-1. UTF-8 인코딩을 사용해서 문자열을 출력, 네트워크 프로그래밍을 할 때, 문자열 전송시 자주 사용된다고 함.
-            dos.writeUTF("test 메세지");
+
+            String name = "임경민";
+
+            String result = convertToHex(name);
+
+            dos.writeUTF(result);
             System.out.println("데이터를 전송합니다");
 
             dos.close();
@@ -39,4 +46,12 @@ public class Client_main {
             e.printStackTrace();
         }
     }
+
+        private static String convertToHex (String name){
+            byte[] getByteString = name.getBytes(StandardCharsets.UTF_8);
+            BigInteger bigInteger = new BigInteger(1, getByteString);
+
+            String convertResult = String.format("%x", bigInteger);
+            return convertResult;
+        }
 }
