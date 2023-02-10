@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class Server_main {
     public static void main(String[] args) {
+        
         // 1. Server프로그램에서 사용하는소캣, Port를 통해 연결 요청이 오기를 대기
         ServerSocket serverSocket = null;
 
